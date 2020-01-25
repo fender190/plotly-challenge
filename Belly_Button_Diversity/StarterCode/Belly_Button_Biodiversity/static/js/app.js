@@ -1,5 +1,5 @@
 function buildMetadata(sample) {
-
+  // Instructions
   // @TODO: Complete the following function that builds the metadata panel
 
   // Use `d3.json` to fetch the metadata for a sample
@@ -13,10 +13,26 @@ function buildMetadata(sample) {
 
     // BONUS: Build the Gauge Chart
     // buildGauge(data.WFREQ);
-}
+  // get metasample data, loop trough Object entries and append to meta-data box
+  var urlmeta = `/metadata/${sample}`;
+  var meta = d3.select("#sample-metadata")
+
+  d3.json(urlmeta).then(data => {
+    console.log(data);
+    meta.html("");
+    Object.entries(data).forEach(([key,value])=>{
+      var para = meta.append("p")
+      para.text(`${key}: ${value}`)
+    });
+    })
+  };
+    
+};
+
 
 function buildCharts(sample) {
 
+  // Instructions
   // @TODO: Use `d3.json` to fetch the sample data for the plots
 
     // @TODO: Build a Bubble Chart using the sample data
